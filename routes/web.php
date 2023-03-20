@@ -1,7 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Services\Notification\Notification;
+use App\Http\Controllers\Auth\Personalize\MagicController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\Personalize\TwoFactorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +33,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::get('test', function () {
+    (new Notification)->sendSms(User::first(), 'add');
+});
+
+
+Route::prefix('auth')->group(function () {
+    Route::get('login/magic/form', [MagicController::class, 'showMagicForm'])->name('login.magic.showMagicForm');
+    Route::post('login/magic', [MagicController::class, 'sendToken'])->name('login.magic.sendToken');
+    Route::get('login/magic/{magicToken:token}', [MagicController::class, 'authenticate'])->name('login.magic.authenticate');
+    Route::middleware('auth')->group(function () {
+        Route::get('two-factor/toggle', [TwoFactorController::class, 'showTwoFactorForm'])->name('auth.two-factor.toggle');
+        Route::get('two-factor/activate', [TwoFactorController::class, 'requestActivate'])->name('auth.two-factor.activate');
+        Route::get('two-factor/activate/form', [TwoFactorController::class, 'showEnterCodeForm'])->name('auth.two-factor.showEnterCode');
+        Route::post('two-factor/confirmCode', [TwoFactorController::class, 'confirmCode'])->name('auth.two-factor.confirmCode');
+        Route::get('two-factor/deActive', [TwoFactorController::class, 'deActive'])->name('auth.two-factor.deActive');
+        Route::get('login/code', [AuthenticatedSessionController::class, 'showCodeForm'])->name('auth.login.showCodeForm');
+        Route::post('login/confirmCode', [AuthenticatedSessionController::class, 'confirmCode'])->name('auth.login.confirmCode');
+    });
+});

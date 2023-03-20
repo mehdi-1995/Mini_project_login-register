@@ -1,42 +1,36 @@
 @extends('layouts.auth')
 
 @section('title', __())
-
 @section('class', 'log_in_page')
 
 @section('content')
-    <!--======= log_in_page =======-->
-    <div id="log-in" class="site-form log-in-form">
-        <div id="log-in-head">
-            <h1 class="text-danger">ورود جادویی</h1>
-            <div id="logo"><a href="01-home.html"><img src="/img/logo.png" alt=""></a></div>
-        </div>
-        <div class="form-output">
-            <x-alert-section></x-alert-section>
-            <x-error-validations />
-            <p class="small text-center card-text">@lang('auth.we\'ve send a SMS to your number')</p>
-            <form action="{{ route('auth.two-factor.confirmCode') }}" method="post">
-                @csrf
-                <div class="form-group row">
-                    <div class="form-control">
-                        <input type="text" name="code" class="form-control" id="code" aria-describedby="codeHelp"
-                            placeholder="@lang('auth.enter code')">
-                    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    @lang('auth.two factor authentication')
                 </div>
-                <div class="form-group row">
-                    <button type="submit" class="btn btn-primary">@lang('auth.confirm')</button>
-                    <a class="small ml-2" href="#">@lang('auth.didNotGetCode')</a>
+                <div class="card-body">
+                    <x-alert-section></x-alert-section>
+                    <p class="small text-center card-text">@lang('auth.we\'ve send a SMS to your number')</p>
+                    <form method="POST" action="{{ route('auth.two-factor.confirmCode') }}">
+                        @csrf
+                        <div class="form-group row">
+                            <div class="col-sm-8 offset-sm-2">
+                                <input type="text" name="code" class="form-control" id="code"
+                                    aria-describedby="codeHelp" placeholder="@lang('auth.enter code')">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 offset-sm-3">
+                            <x-error-validations></x-error-validations>
+                        </div>
+                        <div class="offset-sm-3">
+                            <button type="submit" class="btn btn-primary">@lang('auth.confirm')</button>
+                            <a class="small ml-2" href="#">@lang('auth.didNotGetCode')</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-    <!--======= // log_in_page =======-->
 @endsection
-
-
-
-
-
-
-
-

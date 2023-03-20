@@ -9,10 +9,9 @@
     <div id="log-in" class="site-form log-in-form">
         <div id="log-in-head">
             <h5 class="text-center text-info">@lang('auth.Two-step authentication')</h5>
-            <div id="logo"><img src="/img/logo.png" alt=""></a></div>
+            <div id="logo"><a href="01-home.html"><img src="/img/logo.png" alt=""></a></div>
         </div>
         <div class="form-output">
-            <x-alert-section></x-alert-section>
             @if (auth()->user()->hasTwoFactor())
                 <div class="card-body text-center">
                     <div>

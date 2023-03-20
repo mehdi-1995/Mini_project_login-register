@@ -11,7 +11,7 @@
         <div class="form-output">
             <x-alert-section></x-alert-section>
             <x-error-validations />
-            <form action="{{ route('auth.magic.link.send') }}" method="post">
+            <form action="{{ route('login.magic.sendToken') }}" method="post">
                 @csrf
                 <div class="form-group label-floating">
                     <label class="control-label">ایمیل</label>

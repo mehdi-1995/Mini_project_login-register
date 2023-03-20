@@ -33,7 +33,8 @@
                 </div>
 
                 <button class="btn btn-lg btn-primary full-width">ورود</button>
-                <a class="btn btn-lg btn-primary full-width" href="{{ route('auth.magic.link') }}">ورود با لینک جادویی</a>
+                <a class="btn btn-lg btn-primary full-width" href="{{ route('login.magic.showMagicForm') }}">ورود با لینک
+                    جادویی</a>
 
                 <div class="or"></div>
 
