@@ -4,7 +4,6 @@ namespace App\Models\Traits;
 
 use Illuminate\Support\Str;
 use App\Models\Auth\MagicToken;
-use App\Services\Notification\Notification;
 
 trait MagicallyAuthenticatable
 {

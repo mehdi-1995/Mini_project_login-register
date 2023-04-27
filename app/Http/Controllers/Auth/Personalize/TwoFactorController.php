@@ -48,3 +48,7 @@ class TwoFactorController extends Controller
         return redirect()->route('index')->with('twoFactorDeactivated', __('auth.twoFactorDeactivated'));
     }
 }
+
+
+
+

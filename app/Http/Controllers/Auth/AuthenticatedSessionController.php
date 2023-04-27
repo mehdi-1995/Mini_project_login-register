@@ -37,13 +37,14 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        // $user = User::findOrFail($request->email);  findOrFail not response
         $user = $this->getUser($request);
 
         if ($user->has_two_factor) {
             $this->twoFactor->generateCode($user);
             return $this->sendHasTwoFactorResponse();
         }
+        Auth::login($user, $request->remember);
+        return $this->sendResponseSuccess();
     }
     public function getUser($request)
     {

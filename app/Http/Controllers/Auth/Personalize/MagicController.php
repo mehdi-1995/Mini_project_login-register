@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth\Personalize;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Auth\MagicToken;
 use App\Services\MagicAuthenticate;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MagicController extends Controller
 {
